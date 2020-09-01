@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     public float Speed = 3.5f;
     public float JumpingForce = 10f;
+    public float RotatingSpeed = 140f;
 
     private bool canJump = true;
 
@@ -20,12 +21,22 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += Vector3.left * Speed * Time.deltaTime;
+            transform.RotateAround(transform.position, Vector3.up, -RotatingSpeed * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += Vector3.right * Speed * Time.deltaTime;
+            transform.RotateAround(transform.position, Vector3.up, RotatingSpeed * Time.deltaTime);
+        }
+
+        //if (Input.GetKey(KeyCode.DownArrow))
+        //{
+        //    transform.position += transform.ba * Speed * Time.deltaTime;
+        //}
+
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            transform.position += transform.forward * Speed * Time.deltaTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
